@@ -1,0 +1,337 @@
+{
+  "personal": {
+    "name": "Parker Tootill",
+    "title": "Senior CBRN Warrant Officer",
+    "organization": "18th Airborne Corps",
+    "location": "Fort Liberty, NC",
+    "email": "parker.tootill@email.com",
+    "linkedin": "https://www.linkedin.com/in/parker-tootill-5a604449/",
+    "phone": "",
+    "availability": "Available for opportunities",
+    "travelWillingness": "Willing to travel up to 50%",
+    "clearance": "[CLEARANCE LEVEL]"
+  },
+  "missionStatement": "Senior CBRN Warrant Officer with extensive experience in CWMD operations, interagency coordination, and force readiness. Proven track record of developing and executing comprehensive CBRN defense programs that enhance operational capabilities across DoD, DHS, and state/local emergency management partners. Committed to advancing national security through strategic planning, rigorous training programs, and data-driven decision support.",
+  "skillChips": [
+    "CWMD",
+    "CBRN",
+    "Homeland Security",
+    "Emergency Management",
+    "Planning",
+    "Operations",
+    "Exercises",
+    "Risk Assessment",
+    "Training"
+  ],
+  "executiveSummary": [
+    "Senior CBRN Warrant Officer with [X] years of experience leading chemical, biological, radiological, and nuclear defense operations across tactical, operational, and strategic levels.",
+    "Subject matter expert in Countering Weapons of Mass Destruction (CWMD) with demonstrated success in interagency coordination involving DoD, DHS, and state/local emergency management stakeholders.",
+    "Designed and executed large-scale CBRN exercises that validated readiness and identified capability gaps, resulting in measurable improvements to unit preparedness.",
+    "Led cross-functional teams in developing threat assessments, risk mitigation strategies, and operational plans that directly supported senior leader decision-making.",
+    "Established training programs and standard operating procedures adopted across multiple units, enhancing organizational CBRN response capabilities.",
+    "Currently pursuing professional development in AI/ML applications for defense and national security operations, with focus on responsible AI integration for decision support and threat analysis.",
+    "Proven ability to translate complex technical information into actionable guidance for commanders and policymakers across military and civilian organizations.",
+    "Track record of building and maintaining relationships with key stakeholders in CWMD, homeland security, and emergency management communities."
+  ],
+  "skills": {
+    "categories": [
+      {
+        "name": "CWMD & Counterproliferation",
+        "skills": [
+          { "name": "CWMD Strategy & Policy", "proficiency": "Advanced", "years": 8 },
+          { "name": "Counterproliferation Operations", "proficiency": "Advanced", "years": 6 },
+          { "name": "WMD Threat Analysis", "proficiency": "Advanced", "years": 7 },
+          { "name": "Nonproliferation Programs", "proficiency": "Working", "years": 4 }
+        ]
+      },
+      {
+        "name": "CBRN Defense & Response",
+        "skills": [
+          { "name": "CBRN Reconnaissance", "proficiency": "Advanced", "years": 10 },
+          { "name": "Hazard Prediction & Modeling", "proficiency": "Advanced", "years": 8 },
+          { "name": "Decontamination Operations", "proficiency": "Advanced", "years": 10 },
+          { "name": "CBRN Equipment Management", "proficiency": "Advanced", "years": 10 },
+          { "name": "Consequence Management", "proficiency": "Working", "years": 5 }
+        ]
+      },
+      {
+        "name": "Nuclear Weapons Effects & Proliferation",
+        "skills": [
+          { "name": "Nuclear Weapons Effects Analysis", "proficiency": "Working", "years": 3 },
+          { "name": "Proliferation Pathways", "proficiency": "Working", "years": 3 },
+          { "name": "Nuclear Security Policy", "proficiency": "Foundational", "years": 2 }
+        ]
+      },
+      {
+        "name": "Homeland Security Mission Areas",
+        "skills": [
+          { "name": "Critical Infrastructure Protection", "proficiency": "Working", "years": 4 },
+          { "name": "Border & Transportation Security", "proficiency": "Foundational", "years": 2 },
+          { "name": "Domestic Counterterrorism", "proficiency": "Working", "years": 5 },
+          { "name": "Defense Support to Civil Authorities", "proficiency": "Advanced", "years": 6 }
+        ]
+      },
+      {
+        "name": "Emergency Management",
+        "skills": [
+          { "name": "Preparedness Planning", "proficiency": "Advanced", "years": 8 },
+          { "name": "Response Operations", "proficiency": "Advanced", "years": 10 },
+          { "name": "Recovery Coordination", "proficiency": "Working", "years": 4 },
+          { "name": "Mitigation Strategies", "proficiency": "Working", "years": 4 }
+        ]
+      },
+      {
+        "name": "Incident Management",
+        "skills": [
+          { "name": "Incident Command System (ICS)", "proficiency": "Advanced", "years": 8 },
+          { "name": "NIMS Framework", "proficiency": "Advanced", "years": 7 },
+          { "name": "Unified Command Operations", "proficiency": "Advanced", "years": 6 },
+          { "name": "Emergency Operations Center", "proficiency": "Working", "years": 5 }
+        ]
+      },
+      {
+        "name": "Planning, Exercises & Evaluation",
+        "skills": [
+          { "name": "Operational Planning", "proficiency": "Advanced", "years": 10 },
+          { "name": "Exercise Design & Execution", "proficiency": "Advanced", "years": 8 },
+          { "name": "After Action Reviews", "proficiency": "Advanced", "years": 10 },
+          { "name": "Doctrine Development", "proficiency": "Working", "years": 5 }
+        ]
+      },
+      {
+        "name": "Risk, Threat & Vulnerability Assessment",
+        "skills": [
+          { "name": "Threat Assessment", "proficiency": "Advanced", "years": 8 },
+          { "name": "Vulnerability Analysis", "proficiency": "Advanced", "years": 7 },
+          { "name": "Risk Mitigation Planning", "proficiency": "Advanced", "years": 7 },
+          { "name": "Intelligence Integration", "proficiency": "Working", "years": 5 }
+        ]
+      },
+      {
+        "name": "Interagency Coordination & Stakeholder Engagement",
+        "skills": [
+          { "name": "DoD-DHS Coordination", "proficiency": "Advanced", "years": 6 },
+          { "name": "State/Local Liaison", "proficiency": "Advanced", "years": 7 },
+          { "name": "Coalition Building", "proficiency": "Working", "years": 5 },
+          { "name": "Stakeholder Communication", "proficiency": "Advanced", "years": 8 }
+        ]
+      },
+      {
+        "name": "Decision Support & Analytics",
+        "skills": [
+          { "name": "Decision Support Systems", "proficiency": "Working", "years": 4 },
+          { "name": "Data Analysis & Visualization", "proficiency": "Working", "years": 3 },
+          { "name": "Briefing & Presentation", "proficiency": "Advanced", "years": 10 },
+          { "name": "Report Writing", "proficiency": "Advanced", "years": 10 }
+        ]
+      },
+      {
+        "name": "Technology & Responsible AI",
+        "skills": [
+          { "name": "AI/ML Fundamentals", "proficiency": "Foundational", "years": 1 },
+          { "name": "Responsible AI for Defense", "proficiency": "Foundational", "years": 1 },
+          { "name": "Emerging Technology Assessment", "proficiency": "Working", "years": 3 },
+          { "name": "Digital Transformation", "proficiency": "Foundational", "years": 2 }
+        ]
+      }
+    ]
+  },
+  "experience": [
+    {
+      "id": "exp-1",
+      "title": "Senior CBRN Warrant Officer",
+      "organization": "18th Airborne Corps",
+      "location": "Fort Liberty, NC",
+      "startDate": "2021",
+      "endDate": "Present",
+      "missionContext": "Serves as the principal CBRN advisor to the Corps Commander, providing technical expertise and strategic guidance on CWMD operations, CBRN defense, and force readiness for America's Contingency Corps.",
+      "responsibilities": [
+        "Advise senior leaders on CBRN threats, vulnerabilities, and mitigation strategies across the Corps' global mission set",
+        "Lead development and execution of CBRN training programs for subordinate units",
+        "Coordinate CBRN operations and planning with joint, interagency, and multinational partners",
+        "Manage CBRN equipment modernization and capability development initiatives"
+      ],
+      "outcomes": [
+        "Established Corps-wide CBRN readiness assessment program, improving unit preparedness metrics by [X]%",
+        "Led [X] major exercises integrating CBRN scenarios with conventional operations",
+        "Developed standardized SOPs adopted by [X] subordinate brigades"
+      ]
+    },
+    {
+      "id": "exp-2",
+      "title": "[Previous CBRN Role]",
+      "organization": "[Unit/Organization]",
+      "location": "[Location]",
+      "startDate": "[Year]",
+      "endDate": "[Year]",
+      "missionContext": "[Description of the unit's mission and your role within it]",
+      "responsibilities": [
+        "[Key responsibility 1]",
+        "[Key responsibility 2]",
+        "[Key responsibility 3]"
+      ],
+      "outcomes": [
+        "[Measurable outcome 1]",
+        "[Measurable outcome 2]"
+      ]
+    },
+    {
+      "id": "exp-3",
+      "title": "[Earlier CBRN Role]",
+      "organization": "[Unit/Organization]",
+      "location": "[Location]",
+      "startDate": "[Year]",
+      "endDate": "[Year]",
+      "missionContext": "[Description of the unit's mission and your role within it]",
+      "responsibilities": [
+        "[Key responsibility 1]",
+        "[Key responsibility 2]",
+        "[Key responsibility 3]"
+      ],
+      "outcomes": [
+        "[Measurable outcome 1]",
+        "[Measurable outcome 2]"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-1",
+      "type": "certificate",
+      "title": "Graduate Certificate Program in National Security Studies",
+      "institution": "U.S. Army War College",
+      "location": "Carlisle, PA",
+      "completionDate": "[Year]",
+      "status": "Completed",
+      "description": "Advanced study in national security strategy, policy, and senior leader decision-making."
+    },
+    {
+      "id": "edu-2",
+      "type": "education",
+      "title": "CWMD and Nuclear Weapons Effects, Policy, and Proliferation Focus",
+      "institution": "Air Force Institute of Technology",
+      "location": "Wright-Patterson AFB, OH",
+      "completionDate": "[Expected Year]",
+      "status": "In Progress",
+      "description": "Specialized coursework in nuclear weapons effects analysis, proliferation dynamics, and CWMD policy frameworks."
+    },
+    {
+      "id": "edu-3",
+      "type": "professional_development",
+      "title": "Strategic AI/ML Broadening Seminar",
+      "institution": "DEVCOM Army Research Lab",
+      "location": "Adelphi, MD",
+      "completionDate": "[Year]",
+      "status": "Completed",
+      "description": "Executive-level seminar on artificial intelligence and machine learning applications for defense, focusing on responsible AI implementation and strategic implications."
+    },
+    {
+      "id": "edu-4",
+      "type": "degree",
+      "title": "[Degree Title]",
+      "institution": "[Institution]",
+      "location": "[Location]",
+      "completionDate": "[Year]",
+      "status": "Completed",
+      "description": "[Description of degree and relevant focus areas]"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "[Certification Name]",
+      "issuer": "[Issuing Organization]",
+      "date": "[Year]",
+      "status": "Active"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Corps-Wide CBRN Readiness Assessment Program",
+      "problem": "Lack of standardized metrics to assess CBRN readiness across diverse subordinate units, limiting visibility into capability gaps and training priorities.",
+      "role": "Program Lead and Principal Developer",
+      "approach": "Developed comprehensive assessment framework incorporating equipment readiness, personnel qualifications, and training proficiency. Established quarterly assessment cycle with standardized reporting.",
+      "outcome": "Created enterprise-wide visibility into CBRN readiness, enabling targeted resource allocation and achieving [X]% improvement in overall readiness scores within 12 months.",
+      "tools": ["Assessment Frameworks", "Data Analysis", "Stakeholder Coordination", "Training Management"]
+    },
+    {
+      "id": "proj-2",
+      "title": "Multi-Echelon CWMD Exercise Series",
+      "problem": "Limited integration of CWMD scenarios into conventional training exercises, reducing unit familiarity with WMD threat response procedures.",
+      "role": "Exercise Designer and Chief Evaluator",
+      "approach": "Designed exercise scenarios incorporating realistic CWMD threats, coordinated with multiple echelons and partner organizations, and developed evaluation criteria aligned with doctrinal standards.",
+      "outcome": "Executed [X] exercises involving [X] personnel, identifying [X] critical capability gaps and driving updates to unit SOPs and training programs.",
+      "tools": ["Exercise Design", "Scenario Development", "Evaluation Methodology", "After Action Review"]
+    },
+    {
+      "id": "proj-3",
+      "title": "Interagency CBRN Response Coordination Initiative",
+      "problem": "Insufficient coordination mechanisms between military CBRN units and state/local emergency management agencies, potentially delaying response to domestic CBRN incidents.",
+      "role": "Military Liaison and Working Group Lead",
+      "approach": "Established recurring coordination meetings with state emergency management agencies, developed joint response protocols, and conducted tabletop exercises to validate procedures.",
+      "outcome": "Created formal coordination agreements with [X] state agencies, reduced notification timelines by [X]%, and established template for replication across other installations.",
+      "tools": ["Interagency Coordination", "Protocol Development", "Tabletop Exercises", "Stakeholder Engagement"]
+    }
+  ],
+  "strengths": [
+    "Operational Leadership: Proven ability to lead CBRN operations across tactical, operational, and strategic levels with consistent mission success.",
+    "CBRN Technical Expertise: Deep knowledge of CBRN threats, detection, protection, and decontamination operations built over [X] years of specialized service.",
+    "Interagency Coordination: Demonstrated success building and maintaining relationships across DoD, DHS, and state/local emergency management organizations.",
+    "Training and Exercise Design: Extensive experience developing and executing realistic training programs and exercises that improve organizational readiness.",
+    "Strategic Communication: Ability to translate complex technical CBRN information into clear guidance for senior leaders and diverse stakeholders.",
+    "Operational Planning: Strong analytical skills applied to threat assessment, risk mitigation, and operational planning at multiple echelons.",
+    "Decision Support: Track record of providing timely, accurate analysis that directly informs senior leader decisions.",
+    "Adaptability: Proven ability to operate effectively in ambiguous environments and rapidly changing conditions."
+  ],
+  "developmentAreas": [
+    "Nuclear Policy Analysis: Deepening expertise in nuclear weapons policy, arms control frameworks, and strategic deterrence concepts through AFIT coursework.",
+    "Advanced Data Analytics: Building proficiency in data analysis tools and methods to enhance decision support capabilities.",
+    "AI/ML Applications: Developing foundational understanding of responsible AI applications for defense through self-directed learning and professional development.",
+    "Emergency Management Doctrine: Expanding knowledge of civilian emergency management frameworks beyond military-specific applications.",
+    "Strategic Communication: Enhancing written communication skills for policy-level audiences through targeted professional development.",
+    "Coalition Operations: Seeking opportunities to deepen experience with multinational CBRN coordination and interoperability."
+  ],
+  "gaps": [
+    {
+      "gap": "Limited civilian emergency management credentials",
+      "mitigation": "Pursuing relevant certifications (e.g., CEM) and seeking opportunities for state/local emergency management engagement."
+    },
+    {
+      "gap": "Emerging technology depth (AI/ML)",
+      "mitigation": "Completing professional development courses, participating in defense AI initiatives, and applying concepts to current work."
+    },
+    {
+      "gap": "Nuclear policy academic credentials",
+      "mitigation": "Completing AFIT program with focus on nuclear weapons effects, policy, and proliferation."
+    },
+    {
+      "gap": "Private sector/contractor experience",
+      "mitigation": "Engaging with industry partners, attending relevant conferences, and building professional network outside government."
+    }
+  ],
+  "learningPlan": [
+    {
+      "item": "Complete AFIT CWMD/Nuclear Weapons coursework",
+      "targetDate": "[Month Year]",
+      "status": "In Progress"
+    },
+    {
+      "item": "Obtain Certified Emergency Manager (CEM) credential",
+      "targetDate": "[Month Year]",
+      "status": "Planned"
+    },
+    {
+      "item": "Complete DoD AI/ML fundamentals training",
+      "targetDate": "[Month Year]",
+      "status": "Planned"
+    },
+    {
+      "item": "Attend [Relevant Conference/Training]",
+      "targetDate": "[Month Year]",
+      "status": "Planned"
+    }
+  ],
+  "publications": [],
+  "speaking": [],
+  "awards": []
+}

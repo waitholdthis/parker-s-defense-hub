@@ -1,0 +1,11 @@
+export { Navigation } from "./Navigation";
+export { Hero } from "./Hero";
+export { ExecutiveSummary } from "./ExecutiveSummary";
+export { Skills } from "./Skills";
+export { Experience } from "./Experience";
+export { Education } from "./Education";
+export { Projects } from "./Projects";
+export { Development } from "./Development";
+export { Contact } from "./Contact";
+export { Footer } from "./Footer";
+export { SEO } from "./SEO";
