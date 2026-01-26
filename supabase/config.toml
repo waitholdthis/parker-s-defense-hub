@@ -1,0 +1,4 @@
+project_id = "zecybkbqhvozavumzeqp"
+
+[functions.ask-parker]
+verify_jwt = false
