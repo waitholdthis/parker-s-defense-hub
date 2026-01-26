@@ -9,3 +9,4 @@ export { Development } from "./Development";
 export { Contact } from "./Contact";
 export { Footer } from "./Footer";
 export { SEO } from "./SEO";
+export { AskParker } from "./AskParker";

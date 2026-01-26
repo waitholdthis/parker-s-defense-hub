@@ -10,6 +10,7 @@ import {
   Contact,
   Footer,
   SEO,
+  AskParker,
 } from "@/components/resume";
 
 const Index = () => {
@@ -28,6 +29,7 @@ const Index = () => {
         <Contact />
       </main>
       <Footer />
+      <AskParker />
     </>
   );
 };
