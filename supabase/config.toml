@@ -2,3 +2,9 @@ project_id = "zecybkbqhvozavumzeqp"
 
 [functions.ask-parker]
 verify_jwt = false
+
+[functions.admin-login]
+verify_jwt = false
+
+[functions.admin-resume]
+verify_jwt = false
