@@ -1,6 +1,6 @@
 import { GraduationCap, Award, BookOpen, MapPin, Calendar, CheckCircle, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import resumeData from "@/data/resume.json";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 const typeIcons = {
   degree: GraduationCap,
@@ -16,13 +16,15 @@ const statusColors = {
 };
 
 export function Education() {
+  const { data } = useResumeDataContext();
+
   return (
     <section id="education" className="section">
       <div className="container-wide">
         <h2 className="mb-8">Education & Professional Development</h2>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {resumeData.education.map((item) => {
+          {data.education.map((item) => {
             const Icon = typeIcons[item.type as keyof typeof typeIcons] || BookOpen;
             const statusClass = statusColors[item.status as keyof typeof statusColors] || statusColors.Planned;
 
@@ -72,11 +74,11 @@ export function Education() {
         </div>
 
         {/* Certifications */}
-        {resumeData.certifications.length > 0 && (
+        {data.certifications.length > 0 && (
           <div className="mt-12">
             <h3 className="text-xl font-semibold mb-6">Certifications</h3>
             <div className="flex flex-wrap gap-4">
-              {resumeData.certifications.map((cert, index) => (
+              {data.certifications.map((cert, index) => (
                 <div
                   key={index}
                   className="bg-card border border-border rounded-lg px-4 py-3"

@@ -12,10 +12,11 @@ import {
   SEO,
   AskParker,
 } from "@/components/resume";
+import { ResumeDataProvider } from "@/contexts/ResumeDataContext";
 
 const Index = () => {
   return (
-    <>
+    <ResumeDataProvider>
       <SEO />
       <Navigation />
       <main>
@@ -30,7 +31,7 @@ const Index = () => {
       </main>
       <Footer />
       <AskParker />
-    </>
+    </ResumeDataProvider>
   );
 };
 

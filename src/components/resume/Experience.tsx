@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import resumeData from "@/data/resume.json";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 export function Experience() {
+  const { data } = useResumeDataContext();
   const [expandedIds, setExpandedIds] = useState<string[]>([
-    resumeData.experience[0]?.id,
+    data.experience[0]?.id,
   ]);
 
   const toggleExpanded = (id: string) => {
@@ -24,7 +25,7 @@ export function Experience() {
           <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-border" />
 
           <div className="space-y-8">
-            {resumeData.experience.map((role, index) => {
+            {data.experience.map((role, index) => {
               const isExpanded = expandedIds.includes(role.id);
 
               return (

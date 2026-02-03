@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import resumeData from "@/data/resume.json";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 type Proficiency = "Advanced" | "Working" | "Foundational";
 
@@ -14,10 +14,11 @@ const proficiencyColors: Record<Proficiency, string> = {
 };
 
 export function Skills() {
+  const { data } = useResumeDataContext();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
 
-  const categories = resumeData.skills.categories;
+  const categories = data.skills.categories;
 
   const filteredCategories = useMemo(() => {
     if (!searchQuery.trim()) {
