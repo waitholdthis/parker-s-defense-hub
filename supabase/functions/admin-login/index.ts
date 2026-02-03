@@ -44,28 +44,51 @@ serve(async (req) => {
         );
       }
 
-      const passwordHash = await hashPassword(password);
-
-      // Check if admin user exists with this password
-      const { data: adminUser, error: userError } = await supabase
-        .from("admin_users")
-        .select("id")
-        .eq("password_hash", passwordHash)
-        .maybeSingle();
-
-      if (userError) {
-        console.error("Error checking admin user:", userError);
+      // Compare against the ADMIN_PASSWORD secret
+      const adminPassword = Deno.env.get("ADMIN_PASSWORD");
+      
+      if (!adminPassword) {
+        console.error("ADMIN_PASSWORD secret not configured");
         return new Response(
-          JSON.stringify({ error: "Authentication failed" }),
+          JSON.stringify({ error: "Server configuration error" }),
           { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
 
-      if (!adminUser) {
+      if (password !== adminPassword) {
         return new Response(
           JSON.stringify({ error: "Invalid password" }),
           { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
+      }
+
+      // Get or create admin user for session tracking
+      let adminUserId: string;
+      const { data: existingUser } = await supabase
+        .from("admin_users")
+        .select("id")
+        .eq("username", "admin")
+        .maybeSingle();
+
+      if (existingUser) {
+        adminUserId = existingUser.id;
+      } else {
+        // Create admin user if doesn't exist
+        const passwordHash = await hashPassword(password);
+        const { data: newUser, error: createError } = await supabase
+          .from("admin_users")
+          .insert({ username: "admin", password_hash: passwordHash })
+          .select("id")
+          .single();
+        
+        if (createError || !newUser) {
+          console.error("Error creating admin user:", createError);
+          return new Response(
+            JSON.stringify({ error: "Failed to initialize admin" }),
+            { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+        adminUserId = newUser.id;
       }
 
       // Create new session
@@ -77,13 +100,13 @@ serve(async (req) => {
       await supabase
         .from("admin_sessions")
         .delete()
-        .eq("admin_user_id", adminUser.id);
+        .eq("admin_user_id", adminUserId);
 
       // Create new session
       const { error: sessionError } = await supabase
         .from("admin_sessions")
         .insert({
-          admin_user_id: adminUser.id,
+          admin_user_id: adminUserId,
           session_token: newSessionToken,
           expires_at: expiresAt.toISOString(),
         });
