@@ -1,8 +1,10 @@
 import { Mail, Linkedin, MapPin, Briefcase, Plane, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import resumeData from "@/data/resume.json";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 export function Contact() {
+  const { data } = useResumeDataContext();
+
   return (
     <section id="contact" className="section section-alt">
       <div className="container-wide">
@@ -17,14 +19,14 @@ export function Contact() {
           {/* Contact Actions */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             <Button size="lg" asChild>
-              <a href={`mailto:${resumeData.personal.email}`} className="gap-2">
+              <a href={`mailto:${data.personal.email}`} className="gap-2">
                 <Mail className="h-4 w-4" />
                 Send Email
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
               <a
-                href={resumeData.personal.linkedin}
+                href={data.personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="gap-2"
@@ -43,7 +45,7 @@ export function Contact() {
                 <span className="font-medium">Availability</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                {resumeData.personal.availability}
+                {data.personal.availability}
               </p>
             </div>
             <div className="bg-card border border-border rounded-lg p-4">
@@ -52,7 +54,7 @@ export function Contact() {
                 <span className="font-medium">Travel</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                {resumeData.personal.travelWillingness}
+                {data.personal.travelWillingness}
               </p>
             </div>
             <div className="bg-card border border-border rounded-lg p-4">
@@ -61,7 +63,7 @@ export function Contact() {
                 <span className="font-medium">Clearance</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                {resumeData.personal.clearance}
+                {data.personal.clearance}
               </p>
             </div>
           </div>

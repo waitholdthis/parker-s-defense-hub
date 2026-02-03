@@ -1,8 +1,10 @@
 import { Lightbulb, Target, Wrench } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import resumeData from "@/data/resume.json";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 export function Projects() {
+  const { data } = useResumeDataContext();
+
   return (
     <section id="projects" className="section section-alt">
       <div className="container-wide">
@@ -13,7 +15,7 @@ export function Projects() {
         </p>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          {resumeData.projects.map((project) => (
+          {data.projects.map((project) => (
             <div
               key={project.id}
               className="bg-card border border-border rounded-lg p-6 shadow-sm"

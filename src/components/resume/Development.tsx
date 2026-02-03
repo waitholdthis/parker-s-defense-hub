@@ -1,6 +1,6 @@
 import { CheckCircle, TrendingUp, AlertTriangle, Calendar, Target } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import resumeData from "@/data/resume.json";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 const statusColors = {
   "In Progress": "bg-proficiency-working text-white",
@@ -9,6 +9,8 @@ const statusColors = {
 };
 
 export function Development() {
+  const { data } = useResumeDataContext();
+
   return (
     <section id="development" className="section">
       <div className="container-wide">
@@ -28,7 +30,7 @@ export function Development() {
               <h3 className="text-lg font-semibold">Strengths</h3>
             </div>
             <ul className="space-y-3">
-              {resumeData.strengths.map((strength, index) => (
+              {data.strengths.map((strength, index) => (
                 <li key={index} className="text-sm text-foreground/80">
                   <span className="font-medium text-foreground">
                     {strength.split(":")[0]}:
@@ -48,7 +50,7 @@ export function Development() {
               <h3 className="text-lg font-semibold">Development Areas</h3>
             </div>
             <ul className="space-y-3">
-              {resumeData.developmentAreas.map((area, index) => (
+              {data.developmentAreas.map((area, index) => (
                 <li key={index} className="text-sm text-foreground/80">
                   <span className="font-medium text-foreground">
                     {area.split(":")[0]}:
@@ -68,7 +70,7 @@ export function Development() {
               <h3 className="text-lg font-semibold">Gaps & Mitigation</h3>
             </div>
             <ul className="space-y-4">
-              {resumeData.gaps.map((item, index) => (
+              {data.gaps.map((item, index) => (
                 <li key={index} className="text-sm">
                   <p className="font-medium text-foreground mb-1">
                     {item.gap}
@@ -92,7 +94,7 @@ export function Development() {
             <h3 className="text-lg font-semibold">Current Learning Plan</h3>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {resumeData.learningPlan.map((item, index) => (
+            {data.learningPlan.map((item, index) => (
               <div
                 key={index}
                 className="bg-secondary/50 rounded-lg p-4 border border-border"

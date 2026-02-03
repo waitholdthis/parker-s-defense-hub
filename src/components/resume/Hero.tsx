@@ -1,31 +1,33 @@
 import { MapPin, Download, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import resumeData from "@/data/resume.json";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 export function Hero() {
+  const { data } = useResumeDataContext();
+
   return (
     <section id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24">
       <div className="container-wide">
         <div className="max-w-3xl">
           {/* Name and Title */}
-          <h1 className="mb-2">{resumeData.personal.name}</h1>
+          <h1 className="mb-2">{data.personal.name}</h1>
           <p className="text-xl md:text-2xl font-medium text-accent mb-4">
-            {resumeData.personal.title}
+            {data.personal.title}
           </p>
           <p className="text-lg text-muted-foreground mb-2">
-            {resumeData.personal.organization}
+            {data.personal.organization}
           </p>
 
           {/* Location */}
           <div className="flex items-center gap-2 text-muted-foreground mb-6">
             <MapPin className="h-4 w-4" />
-            <span>{resumeData.personal.location}</span>
+            <span>{data.personal.location}</span>
           </div>
 
           {/* Mission Statement */}
           <p className="text-lg leading-relaxed text-foreground/90 mb-8">
-            {resumeData.missionStatement}
+            {data.missionStatement}
           </p>
 
           {/* Contact Actions */}
@@ -36,7 +38,7 @@ export function Hero() {
             </Button>
             <Button variant="outline" size="lg" asChild>
               <a
-                href={resumeData.personal.linkedin}
+                href={data.personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="gap-2"
@@ -46,7 +48,7 @@ export function Hero() {
               </a>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <a href={`mailto:${resumeData.personal.email}`} className="gap-2">
+              <a href={`mailto:${data.personal.email}`} className="gap-2">
                 <Mail className="h-4 w-4" />
                 Contact
               </a>
@@ -55,7 +57,7 @@ export function Hero() {
 
           {/* Skill Chips */}
           <div className="flex flex-wrap gap-2">
-            {resumeData.skillChips.map((chip) => (
+            {data.skillChips.map((chip) => (
               <Badge
                 key={chip}
                 variant="secondary"
