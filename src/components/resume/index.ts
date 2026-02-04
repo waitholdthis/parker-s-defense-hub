@@ -10,3 +10,5 @@ export { Contact } from "./Contact";
 export { Footer } from "./Footer";
 export { SEO } from "./SEO";
 export { AskParker } from "./AskParker";
+export { JobFitAnalyzer } from "./JobFitAnalyzer";
+export { FitScoreGauge } from "./FitScoreGauge";
