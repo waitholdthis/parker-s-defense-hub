@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Download, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import resumeData from "@/data/resume.json";
+import { JobFitAnalyzer } from "./JobFitAnalyzer";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 const navItems = [
   { href: "#summary", label: "Summary" },
@@ -14,6 +15,7 @@ const navItems = [
 ];
 
 export function Navigation() {
+  const { data: resumeData } = useResumeDataContext();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -40,7 +42,7 @@ export function Navigation() {
             href="#"
             className="font-semibold text-lg text-foreground hover:text-accent transition-colors"
           >
-            {resumeData.personal.name}
+            {resumeData?.personal?.name || "Resume"}
           </a>
 
           {/* Desktop Navigation */}
@@ -58,22 +60,27 @@ export function Navigation() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <a
-              href={resumeData.personal.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="LinkedIn Profile"
-            >
-              <Linkedin className="h-5 w-5" />
-            </a>
-            <a
-              href={`mailto:${resumeData.personal.email}`}
-              className="text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Send Email"
-            >
-              <Mail className="h-5 w-5" />
-            </a>
+            <JobFitAnalyzer />
+            {resumeData?.personal?.linkedin && (
+              <a
+                href={resumeData.personal.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="LinkedIn Profile"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            )}
+            {resumeData?.personal?.email && (
+              <a
+                href={`mailto:${resumeData.personal.email}`}
+                className="text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Send Email"
+              >
+                <Mail className="h-5 w-5" />
+              </a>
+            )}
             <Button size="sm" className="gap-2">
               <Download className="h-4 w-4" />
               Resume
@@ -108,27 +115,34 @@ export function Navigation() {
                   {item.label}
                 </a>
               ))}
-              <div className="flex items-center gap-3 px-4 pt-4 border-t border-border mt-2">
-                <a
-                  href={resumeData.personal.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="LinkedIn Profile"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-                <a
-                  href={`mailto:${resumeData.personal.email}`}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label="Send Email"
-                >
-                  <Mail className="h-5 w-5" />
-                </a>
-                <Button size="sm" className="gap-2 ml-auto">
-                  <Download className="h-4 w-4" />
-                  Resume
-                </Button>
+              <div className="flex flex-col gap-3 px-4 pt-4 border-t border-border mt-2">
+                <JobFitAnalyzer />
+                <div className="flex items-center gap-3">
+                  {resumeData?.personal?.linkedin && (
+                    <a
+                      href={resumeData.personal.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      aria-label="LinkedIn Profile"
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </a>
+                  )}
+                  {resumeData?.personal?.email && (
+                    <a
+                      href={`mailto:${resumeData.personal.email}`}
+                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      aria-label="Send Email"
+                    >
+                      <Mail className="h-5 w-5" />
+                    </a>
+                  )}
+                  <Button size="sm" className="gap-2 ml-auto">
+                    <Download className="h-4 w-4" />
+                    Resume
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
