@@ -1,122 +1,69 @@
 
 
-# Standout Resume Features Plan
+# Dark/Light Mode Implementation Plan
 
-This plan outlines several innovative features to make your resume website stand out, with the recruiter fit score as the flagship feature.
-
----
-
-## Feature 1: Recruiter Fit Score (Your Idea - The Flagship Feature)
-
-A dedicated interactive section where recruiters can paste a job description or role requirements and receive an AI-powered compatibility analysis with a score out of 100.
-
-### How It Works:
-1. A prominent "Check Fit" or "Match Analysis" section/button in the navigation or hero area
-2. Opens a modal or dedicated panel where recruiters can:
-   - Paste a job title OR
-   - Paste full job description/requirements
-3. AI analyzes the input against your resume data and returns:
-   - **Overall Match Score** (0-100) with a visual gauge/meter
-   - **Category Breakdown**: Skills match %, Experience match %, Education match %
-   - **Strengths for This Role**: Specific skills/experience that align well
-   - **Potential Gaps**: Areas where additional context might be needed
-   - **Talking Points**: Suggested interview discussion topics based on alignment
-
-### Visual Design:
-- Animated circular progress indicator for the score
-- Color-coded sections (green for strong matches, yellow for partial, red for gaps)
-- Exportable/shareable summary for recruiters to save
+This plan adds a theme toggle to your resume website, allowing visitors to switch between light and dark modes. The foundation is already in place - your CSS has both light and dark theme variables, and the required package (`next-themes`) is already installed.
 
 ---
 
-## Feature 2: Interactive Skills Comparison Matrix
+## What Will Change
 
-Enhance the existing Skills section with a "Compare to Role" feature that lets visitors select skills they're looking for and see instant visual feedback.
-
-### Implementation:
-- Add checkboxes or a multi-select interface to the skills section
-- Real-time highlighting of matching skills
-- Summary card showing "X of Y required skills matched"
-- Skills that aren't present but are related get flagged as "Related Experience"
+### User Experience
+- A sun/moon toggle button will appear in the navigation bar (both desktop and mobile)
+- Clicking it switches between light and dark themes
+- The preference is saved to localStorage, so returning visitors see their preferred theme
+- System preference (if user's OS is set to dark mode) is respected by default
 
 ---
 
-## Feature 3: Timeline Visualization
+## Implementation Steps
 
-An interactive, visual timeline that shows career progression, education, and certifications in a scrollable/zoomable format.
+### Step 1: Add ThemeProvider to the App
+Wrap the application with the `ThemeProvider` from `next-themes` in `App.tsx`. This enables theme state management across all components.
 
-### Features:
-- Horizontal or vertical timeline with milestones
-- Hover/click for expanded details
-- Filter by category (Experience, Education, Certifications)
-- Visual indicators for overlapping timeframes
+### Step 2: Create Theme Toggle Component
+Create a new `ThemeToggle.tsx` component that:
+- Uses the `useTheme` hook from `next-themes`
+- Displays a sun icon in dark mode (click to go light)
+- Displays a moon icon in light mode (click to go dark)
+- Includes smooth transition animations
 
----
+### Step 3: Update Navigation
+Add the theme toggle button to the navigation bar:
+- Desktop: Positioned with the other action buttons (LinkedIn, Email, Resume)
+- Mobile: Included in the mobile menu actions section
 
-## Feature 4: "Quick Facts" Dashboard
-
-A stats-based summary card near the hero section showing key metrics at a glance:
-
-- Total Years of Experience: X years
-- Skill Categories: 11 domains
-- Proficiency Levels: X Advanced, Y Working skills
-- Certifications: X completed, Y in progress
-- Clearance Level: [Status]
-- Availability: [Status]
+### Step 4: Update HTML for Flash Prevention
+Add `suppressHydrationWarning` to prevent the brief flash of incorrect theme on page load (standard practice with `next-themes`).
 
 ---
 
-## Feature 5: Personalized Recruiter Experience
+## Technical Details
 
-Allow recruiters to create a "briefing package" by selecting specific sections they want to export:
+### Files to Create
+| File | Purpose |
+|------|---------|
+| `src/components/ThemeToggle.tsx` | Toggle button component with sun/moon icons |
 
-- Generate a custom PDF with only selected sections
-- Email the package directly to themselves
-- Save viewing preferences (like collapsed/expanded sections)
+### Files to Modify
+| File | Change |
+|------|--------|
+| `src/App.tsx` | Wrap app with `ThemeProvider` |
+| `src/components/resume/Navigation.tsx` | Add `ThemeToggle` to desktop and mobile nav |
+| `index.html` | Add `suppressHydrationWarning` to html tag |
 
----
+### Theme Toggle Component Logic
+```text
+if (current theme is dark) 
+  -> show Sun icon 
+  -> click sets theme to "light"
+else 
+  -> show Moon icon 
+  -> click sets theme to "dark"
+```
 
-## Technical Architecture
-
-### New Edge Function: `job-fit-analysis`
-- Accepts job description text as input
-- Uses the Lovable AI gateway (no API key needed)
-- Compares against resume data from the database
-- Returns structured JSON with scores and analysis
-
-### New Components:
-- `src/components/resume/JobFitAnalyzer.tsx` - Main fit score interface
-- `src/components/resume/FitScoreGauge.tsx` - Animated score visualization
-- `src/components/resume/QuickFacts.tsx` - Stats dashboard card
-- `src/components/resume/Timeline.tsx` - Interactive timeline view
-
-### Database Considerations:
-- Optionally track anonymous analytics on job descriptions analyzed (what roles are recruiters matching against)
-- Store no PII, just aggregate data on skill demand
-
----
-
-## Implementation Priority
-
-| Priority | Feature | Effort | Impact |
-|----------|---------|--------|--------|
-| 1 | Recruiter Fit Score | Medium-High | Very High |
-| 2 | Quick Facts Dashboard | Low | Medium |
-| 3 | Skills Comparison | Medium | Medium |
-| 4 | Timeline Visualization | Medium | Medium |
-| 5 | Recruiter Export Package | High | Medium |
-
----
-
-## Recommended First Phase
-
-Start with the **Recruiter Fit Score** feature as it's your flagship idea:
-
-1. Create the new edge function with AI analysis logic
-2. Build the modal/panel UI with job description input
-3. Implement the animated score gauge component
-4. Add the breakdown analysis display
-5. Add a prominent CTA in the navigation/hero area
-
-This feature alone will significantly differentiate your resume from traditional static resumes and provide real value to recruiters evaluating candidates.
+### Default Behavior
+- Defaults to system preference (`system` theme)
+- User can override to `light` or `dark`
+- Preference persists across sessions via localStorage
 
