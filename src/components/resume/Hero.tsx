@@ -1,10 +1,17 @@
 import { MapPin, Download, Linkedin, Mail } from "lucide-react";
-import { Button } from "@/components/ui/button";
+ import { Loader2 } from "lucide-react";
+ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
+ import { useResumeDownload } from "@/hooks/useResumeDownload";
 
 export function Hero() {
   const { data } = useResumeDataContext();
+   const { downloadResume, isGenerating } = useResumeDownload();
+ 
+   const handleDownload = () => {
+     downloadResume(data);
+   };
 
   return (
     <section id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24">
@@ -32,10 +39,14 @@ export function Hero() {
 
           {/* Contact Actions */}
           <div className="flex flex-wrap items-center gap-3 mb-8">
-            <Button size="lg" className="gap-2">
-              <Download className="h-4 w-4" />
-              Download Resume
-            </Button>
+           <Button size="lg" className="gap-2" onClick={handleDownload} disabled={isGenerating}>
+             {isGenerating ? (
+               <Loader2 className="h-4 w-4 animate-spin" />
+             ) : (
+               <Download className="h-4 w-4" />
+             )}
+             {isGenerating ? 'Generating...' : 'Download Resume'}
+           </Button>
             <Button variant="outline" size="lg" asChild>
               <a
                 href={data.personal.linkedin}
