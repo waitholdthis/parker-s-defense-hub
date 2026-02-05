@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Download, Linkedin, Mail } from "lucide-react";
+ import { Menu, X, Download, Linkedin, Mail } from "lucide-react";
+ import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { JobFitAnalyzer } from "./JobFitAnalyzer";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
@@ -61,6 +62,7 @@ export function Navigation() {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
             <JobFitAnalyzer />
+             <ThemeToggle />
             {resumeData?.personal?.linkedin && (
               <a
                 href={resumeData.personal.linkedin}
@@ -118,6 +120,7 @@ export function Navigation() {
               <div className="flex flex-col gap-3 px-4 pt-4 border-t border-border mt-2">
                 <JobFitAnalyzer />
                 <div className="flex items-center gap-3">
+                   <ThemeToggle />
                   {resumeData?.personal?.linkedin && (
                     <a
                       href={resumeData.personal.linkedin}
