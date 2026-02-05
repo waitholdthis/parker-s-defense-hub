@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
- import { Menu, X, Download, Linkedin, Mail } from "lucide-react";
+ import { Menu, X, Download, Linkedin, Mail, Loader2 } from "lucide-react";
  import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { JobFitAnalyzer } from "./JobFitAnalyzer";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
+ import { useResumeDownload } from "@/hooks/useResumeDownload";
 
 const navItems = [
   { href: "#summary", label: "Summary" },
@@ -17,6 +18,7 @@ const navItems = [
 
 export function Navigation() {
   const { data: resumeData } = useResumeDataContext();
+   const { downloadResume, isGenerating } = useResumeDownload();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -28,6 +30,12 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+   const handleDownload = () => {
+     if (resumeData) {
+       downloadResume(resumeData);
+     }
+   };
+ 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -83,8 +91,12 @@ export function Navigation() {
                 <Mail className="h-5 w-5" />
               </a>
             )}
-            <Button size="sm" className="gap-2">
-              <Download className="h-4 w-4" />
+           <Button size="sm" className="gap-2" onClick={handleDownload} disabled={isGenerating}>
+             {isGenerating ? (
+               <Loader2 className="h-4 w-4 animate-spin" />
+             ) : (
+               <Download className="h-4 w-4" />
+             )}
               Resume
             </Button>
           </div>
@@ -141,8 +153,12 @@ export function Navigation() {
                       <Mail className="h-5 w-5" />
                     </a>
                   )}
-                  <Button size="sm" className="gap-2 ml-auto">
-                    <Download className="h-4 w-4" />
+                   <Button size="sm" className="gap-2 ml-auto" onClick={handleDownload} disabled={isGenerating}>
+                     {isGenerating ? (
+                       <Loader2 className="h-4 w-4 animate-spin" />
+                     ) : (
+                       <Download className="h-4 w-4" />
+                     )}
                     Resume
                   </Button>
                 </div>
