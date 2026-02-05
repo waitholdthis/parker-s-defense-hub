@@ -1,69 +1,150 @@
 
 
-# Dark/Light Mode Implementation Plan
+# Professional Resume Download Feature
 
-This plan adds a theme toggle to your resume website, allowing visitors to switch between light and dark modes. The foundation is already in place - your CSS has both light and dark theme variables, and the required package (`next-themes`) is already installed.
+This plan implements a downloadable PDF resume that presents your information in a clean, professional format suitable for recruiters and hiring managers.
 
 ---
 
-## What Will Change
+## What You'll Get
 
-### User Experience
-- A sun/moon toggle button will appear in the navigation bar (both desktop and mobile)
-- Clicking it switches between light and dark themes
-- The preference is saved to localStorage, so returning visitors see their preferred theme
-- System preference (if user's OS is set to dark mode) is respected by default
+When clicking the "Download Resume" button, recruiters will receive a professionally formatted PDF that includes:
+
+- **Header**: Your name, title, contact information, and LinkedIn
+- **Executive Summary**: Your key qualifications in bullet form
+- **Skills**: Organized by category with proficiency levels
+- **Experience**: Full professional history with responsibilities and outcomes
+- **Education & Certifications**: Academic background and credentials
+- **Projects**: Key projects demonstrating your capabilities
+
+The PDF will be clean, ATS-friendly (Applicant Tracking System compatible), and follow traditional resume formatting standards that federal contractors and recruiters expect.
+
+---
+
+## Technical Approach
+
+### Option Chosen: Client-Side PDF Generation
+
+I'll use `jspdf` and `html2canvas` libraries to generate the PDF directly in the browser. This approach:
+- Requires no server/backend processing
+- Works offline once the page is loaded
+- Provides instant downloads
+- Maintains your resume styling
+
+### Library Installation Required
+- `jspdf` - Core PDF generation
+- `html2canvas` - Captures HTML as images for precise styling
 
 ---
 
 ## Implementation Steps
 
-### Step 1: Add ThemeProvider to the App
-Wrap the application with the `ThemeProvider` from `next-themes` in `App.tsx`. This enables theme state management across all components.
+### Step 1: Install PDF Libraries
+Add `jspdf` and `html2canvas` to the project dependencies.
 
-### Step 2: Create Theme Toggle Component
-Create a new `ThemeToggle.tsx` component that:
-- Uses the `useTheme` hook from `next-themes`
-- Displays a sun icon in dark mode (click to go light)
-- Displays a moon icon in light mode (click to go dark)
-- Includes smooth transition animations
+### Step 2: Create Resume PDF Generator Utility
+Create a new utility file that:
+- Takes the resume data from the context
+- Builds a professional PDF layout programmatically
+- Uses proper typography, margins, and spacing
+- Handles page breaks intelligently
+- Returns a downloadable PDF file
 
-### Step 3: Update Navigation
-Add the theme toggle button to the navigation bar:
-- Desktop: Positioned with the other action buttons (LinkedIn, Email, Resume)
-- Mobile: Included in the mobile menu actions section
+### Step 3: Create a Hidden Print-Optimized Resume Component
+Build a separate component specifically designed for PDF output:
+- Uses print-friendly fonts (serif for headers, clean sans-serif for body)
+- Single-column layout for ATS compatibility
+- Proper margins (0.5" - 1" on all sides)
+- Clean black text on white background
+- No interactive elements
 
-### Step 4: Update HTML for Flash Prevention
-Add `suppressHydrationWarning` to prevent the brief flash of incorrect theme on page load (standard practice with `next-themes`).
+### Step 4: Update Download Buttons
+Wire up the existing "Download Resume" buttons in:
+- `Hero.tsx` - Main CTA button
+- `Navigation.tsx` - Nav bar button
+
+Both will trigger the PDF generation and download.
 
 ---
 
-## Technical Details
+## PDF Design Specifications
 
-### Files to Create
-| File | Purpose |
-|------|---------|
-| `src/components/ThemeToggle.tsx` | Toggle button component with sun/moon icons |
+The generated resume will follow professional federal contractor resume standards:
 
-### Files to Modify
-| File | Change |
-|------|--------|
-| `src/App.tsx` | Wrap app with `ThemeProvider` |
-| `src/components/resume/Navigation.tsx` | Add `ThemeToggle` to desktop and mobile nav |
-| `index.html` | Add `suppressHydrationWarning` to html tag |
-
-### Theme Toggle Component Logic
 ```text
-if (current theme is dark) 
-  -> show Sun icon 
-  -> click sets theme to "light"
-else 
-  -> show Moon icon 
-  -> click sets theme to "dark"
++------------------------------------------+
+|  PARKER TOOTILL                          |
+|  Senior CBRN Warrant Officer             |
+|  Fort Liberty, NC | email | LinkedIn     |
++------------------------------------------+
+|                                          |
+|  EXECUTIVE SUMMARY                       |
+|  • Key qualification 1                   |
+|  • Key qualification 2                   |
+|  • ...                                   |
+|                                          |
+|  SKILLS                                  |
+|  CWMD & Counterproliferation             |
+|  • CWMD Strategy & Policy (Advanced, 8y) |
+|  • ...                                   |
+|                                          |
+|  PROFESSIONAL EXPERIENCE                 |
+|  Senior CBRN Warrant Officer             |
+|  18th Airborne Corps | 2021 - Present    |
+|  [Mission context and responsibilities]  |
+|                                          |
+|  EDUCATION                               |
+|  [Degrees and certifications]            |
+|                                          |
++------------------------------------------+
 ```
 
-### Default Behavior
-- Defaults to system preference (`system` theme)
-- User can override to `light` or `dark`
-- Preference persists across sessions via localStorage
+### Typography
+- **Name**: 18-20pt, bold
+- **Section Headers**: 12-14pt, bold, uppercase
+- **Body Text**: 10-11pt, regular
+- **Margins**: 0.75" on all sides
+
+### Color Scheme
+- Pure black text (#000000) for maximum ATS compatibility
+- White background
+- Subtle horizontal lines to separate sections
+
+---
+
+## Files to Create
+
+| File | Purpose |
+|------|---------|
+| `src/utils/generateResumePdf.ts` | Core PDF generation logic |
+| `src/components/resume/ResumePdfContent.tsx` | Hidden component with print layout |
+
+## Files to Modify
+
+| File | Change |
+|------|--------|
+| `src/components/resume/Hero.tsx` | Add onClick handler to Download button |
+| `src/components/resume/Navigation.tsx` | Add onClick handler to Download button |
+| `package.json` | Add jspdf and html2canvas dependencies |
+
+---
+
+## User Experience
+
+1. User clicks "Download Resume" button
+2. Brief loading indicator appears (~1-2 seconds)
+3. Browser downloads `Parker_Tootill_Resume.pdf`
+4. Toast notification confirms success
+
+---
+
+## Why This Approach?
+
+| Consideration | Decision |
+|---------------|----------|
+| **ATS Compatibility** | Text-based PDF, not image-only, so resume scanners can parse it |
+| **Professional Look** | Traditional layout that federal/government recruiters expect |
+| **Dynamic Content** | Always generates from latest database content |
+| **No Server Needed** | Runs entirely in browser, no edge function required |
+| **Print Quality** | High-resolution output suitable for printing |
 
