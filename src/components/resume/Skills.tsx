@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
+import { SkillsRadarChart } from "./SkillsRadarChart";
 
 type Proficiency = "Advanced" | "Working" | "Foundational";
 
@@ -51,6 +52,9 @@ export function Skills() {
           Comprehensive capabilities across CWMD, CBRN, homeland security, and
           emergency management domains.
         </p>
+
+        {/* Radar Chart */}
+        <SkillsRadarChart categories={categories} />
 
         {/* Search Bar */}
         <div className="relative max-w-md mb-8">
