@@ -1,150 +1,144 @@
 
+# Skills Radar Chart Implementation Plan
 
-# Professional Resume Download Feature
+## Overview
+Add an interactive radar chart (also known as a spider chart or polar chart) to the Skills section that visualizes proficiency levels across all 11 skill categories at a glance. This creates a visual "fingerprint" of capabilities, helping recruiters immediately understand where strengths and balanced expertise lie.
 
-This plan implements a downloadable PDF resume that presents your information in a clean, professional format suitable for recruiters and hiring managers.
-
----
-
-## What You'll Get
-
-When clicking the "Download Resume" button, recruiters will receive a professionally formatted PDF that includes:
-
-- **Header**: Your name, title, contact information, and LinkedIn
-- **Executive Summary**: Your key qualifications in bullet form
-- **Skills**: Organized by category with proficiency levels
-- **Experience**: Full professional history with responsibilities and outcomes
-- **Education & Certifications**: Academic background and credentials
-- **Projects**: Key projects demonstrating your capabilities
-
-The PDF will be clean, ATS-friendly (Applicant Tracking System compatible), and follow traditional resume formatting standards that federal contractors and recruiters expect.
-
----
+## Data Structure Analysis
+Your resume has 11 skill categories with multiple skills per category. The radar chart will:
+- Use one data point per category (calculated from the skills within that category)
+- Show average proficiency level for each domain
+- Map proficiency levels to numeric values: Advanced = 3, Working = 2, Foundational = 1
+- Display the resulting score (out of 3) for each domain
 
 ## Technical Approach
 
-### Option Chosen: Client-Side PDF Generation
+### Chart Type: Recharts Radar
+- **Library**: Recharts is already installed and configured
+- **Chart Component**: `RadarChart` with `Radar`, `PolarGrid`, `PolarAngleAxis`, `PolarRadiusAxis`, `Legend`, `Tooltip`
+- **Data Format**: Array of objects with `category` name and `value` (average proficiency)
 
-I'll use `jspdf` and `html2canvas` libraries to generate the PDF directly in the browser. This approach:
-- Requires no server/backend processing
-- Works offline once the page is loaded
-- Provides instant downloads
-- Maintains your resume styling
+### Implementation Strategy
 
-### Library Installation Required
-- `jspdf` - Core PDF generation
-- `html2canvas` - Captures HTML as images for precise styling
+1. **Data Transformation Utility**
+   - Create a function to transform skills data into radar chart format
+   - Calculate average proficiency for each category (Advanced=3, Working=2, Foundational=1)
+   - Return array of `{name: string, value: number}`
 
----
+2. **New Component: SkillsRadarChart**
+   - Location: `src/components/resume/SkillsRadarChart.tsx`
+   - Props: `categories` array from resume data
+   - Uses `ChartContainer` and Recharts `RadarChart`
+   - Responsive sizing with proper styling
+   - Custom tooltip showing category name and proficiency breakdown
 
-## Implementation Steps
-
-### Step 1: Install PDF Libraries
-Add `jspdf` and `html2canvas` to the project dependencies.
-
-### Step 2: Create Resume PDF Generator Utility
-Create a new utility file that:
-- Takes the resume data from the context
-- Builds a professional PDF layout programmatically
-- Uses proper typography, margins, and spacing
-- Handles page breaks intelligently
-- Returns a downloadable PDF file
-
-### Step 3: Create a Hidden Print-Optimized Resume Component
-Build a separate component specifically designed for PDF output:
-- Uses print-friendly fonts (serif for headers, clean sans-serif for body)
-- Single-column layout for ATS compatibility
-- Proper margins (0.5" - 1" on all sides)
-- Clean black text on white background
-- No interactive elements
-
-### Step 4: Update Download Buttons
-Wire up the existing "Download Resume" buttons in:
-- `Hero.tsx` - Main CTA button
-- `Navigation.tsx` - Nav bar button
-
-Both will trigger the PDF generation and download.
-
----
-
-## PDF Design Specifications
-
-The generated resume will follow professional federal contractor resume standards:
-
-```text
-+------------------------------------------+
-|  PARKER TOOTILL                          |
-|  Senior CBRN Warrant Officer             |
-|  Fort Liberty, NC | email | LinkedIn     |
-+------------------------------------------+
-|                                          |
-|  EXECUTIVE SUMMARY                       |
-|  • Key qualification 1                   |
-|  • Key qualification 2                   |
-|  • ...                                   |
-|                                          |
-|  SKILLS                                  |
-|  CWMD & Counterproliferation             |
-|  • CWMD Strategy & Policy (Advanced, 8y) |
-|  • ...                                   |
-|                                          |
-|  PROFESSIONAL EXPERIENCE                 |
-|  Senior CBRN Warrant Officer             |
-|  18th Airborne Corps | 2021 - Present    |
-|  [Mission context and responsibilities]  |
-|                                          |
-|  EDUCATION                               |
-|  [Degrees and certifications]            |
-|                                          |
-+------------------------------------------+
-```
-
-### Typography
-- **Name**: 18-20pt, bold
-- **Section Headers**: 12-14pt, bold, uppercase
-- **Body Text**: 10-11pt, regular
-- **Margins**: 0.75" on all sides
+3. **Integration into Skills Section**
+   - Add radar chart above the category tabs and search (prominent placement)
+   - Display with a brief description: "Skills proficiency across all domains"
+   - Include a max-width container (lg:max-w-2xl) to prevent oversizing on desktop
 
 ### Color Scheme
-- Pure black text (#000000) for maximum ATS compatibility
-- White background
-- Subtle horizontal lines to separate sections
+- Use existing proficiency colors from CSS variables:
+  - Advanced: `hsl(142 76% 36%)` - Green
+  - Working: `hsl(217 91% 60%)` - Blue
+  - Foundational: `hsl(38 92% 50%)` - Orange
+- Single color for radar fill (primary color with opacity for depth)
 
----
+### Responsive Behavior
+- Mobile: Full-width container with appropriate scaling
+- Tablet/Desktop: Centered with max-width constraint
+- Maintains aspect ratio and readability at all breakpoints
 
 ## Files to Create
 
 | File | Purpose |
 |------|---------|
-| `src/utils/generateResumePdf.ts` | Core PDF generation logic |
-| `src/components/resume/ResumePdfContent.tsx` | Hidden component with print layout |
+| `src/components/resume/SkillsRadarChart.tsx` | Main radar chart component |
+| `src/utils/skillsChartUtils.ts` | Data transformation utility |
 
 ## Files to Modify
 
 | File | Change |
 |------|--------|
-| `src/components/resume/Hero.tsx` | Add onClick handler to Download button |
-| `src/components/resume/Navigation.tsx` | Add onClick handler to Download button |
-| `package.json` | Add jspdf and html2canvas dependencies |
+| `src/components/resume/Skills.tsx` | Import and render SkillsRadarChart above current content |
+| `src/components/resume/index.ts` | Export SkillsRadarChart if needed |
 
----
+## Component Details
+
+### SkillsRadarChart.tsx Structure
+```text
+- Takes: skills.categories array as prop
+- Transforms data using utility function
+- Renders ChartContainer with:
+  - ResponsiveContainer (width 100%, height 300-400px)
+  - RadarChart with data
+  - PolarGrid (subtle styling to match theme)
+  - PolarAngleAxis (category names)
+  - PolarRadiusAxis (0-3 scale)
+  - Radar (one series showing proficiency)
+  - Legend (bottom, shows axis label)
+  - Tooltip (custom, shows category + detailed breakdown)
+```
+
+### Data Transformation Example
+Input:
+```
+{
+  name: "CWMD & Counterproliferation",
+  skills: [
+    { name: "CWMD Strategy & Policy", proficiency: "Advanced" },
+    { name: "Counterproliferation Operations", proficiency: "Advanced" },
+    { name: "WMD Threat Analysis", proficiency: "Advanced" },
+    { name: "Nonproliferation Programs", proficiency: "Working" }
+  ]
+}
+```
+
+Output:
+```
+{ name: "CWMD & Counterproliferation", value: 2.75 }
+```
+
+## Visual Design
+
+### Layout Flow
+1. Skills section header and description (existing)
+2. **NEW: Radar Chart** (prominent visual)
+3. Skills Search bar (existing)
+4. Category Tabs and skill cards (existing)
+5. Skills Index (existing)
+
+### Styling
+- Card-style container with border and padding (consistent with existing cards)
+- Light background in light mode, dark background in dark mode
+- Subtle shadows for depth
+- Animation: Fade-in on scroll or on component mount
+- Tooltip on hover showing more detail
 
 ## User Experience
 
-1. User clicks "Download Resume" button
-2. Brief loading indicator appears (~1-2 seconds)
-3. Browser downloads `Parker_Tootill_Resume.pdf`
-4. Toast notification confirms success
+### What Recruiters See
+1. **At a glance**: Visual representation of expertise across all 11 domains
+2. **Instant pattern recognition**: Can see which domains are strengths (outer ring) vs. developing areas (inner)
+3. **Proficiency balance**: Immediately understand breadth vs. depth of expertise
+4. **Interactive details**: Hovering over chart points shows the exact skills and count in that category
 
----
+## Implementation Order
 
-## Why This Approach?
+1. Create utility function to transform skills data
+2. Build SkillsRadarChart component with Recharts
+3. Integrate into Skills.tsx with proper placement
+4. Test responsiveness and theming (light/dark mode)
+5. Verify chart is accessible and readable
 
-| Consideration | Decision |
-|---------------|----------|
-| **ATS Compatibility** | Text-based PDF, not image-only, so resume scanners can parse it |
-| **Professional Look** | Traditional layout that federal/government recruiters expect |
-| **Dynamic Content** | Always generates from latest database content |
-| **No Server Needed** | Runs entirely in browser, no edge function required |
-| **Print Quality** | High-resolution output suitable for printing |
+## Why This Works
+
+| Aspect | Benefit |
+|--------|---------|
+| **Visual Impact** | Instantly communicates expertise distribution without text |
+| **Professional** | Commonly used in resume/portfolio contexts, looks modern |
+| **Data Accurate** | Based on actual skill data, no guessing |
+| **Responsive** | Works on mobile, tablet, desktop |
+| **Themed** | Respects light/dark mode and existing color scheme |
+| **Accessible** | Includes labels, legend, and tooltip for all data |
 
