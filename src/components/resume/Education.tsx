@@ -1,6 +1,7 @@
 import { GraduationCap, Award, BookOpen, MapPin, Calendar, CheckCircle, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const typeIcons = {
   degree: GraduationCap,
@@ -17,9 +18,10 @@ const statusColors = {
 
 export function Education() {
   const { data } = useResumeDataContext();
+  const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="education" className="section">
+    <section id="education" className={`section ${isVisible ? "animate-fade-in" : "opacity-0"}`} ref={ref}>
       <div className="container-wide">
         <h2 className="mb-8">Education & Professional Development</h2>
 

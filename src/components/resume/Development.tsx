@@ -1,6 +1,7 @@
 import { CheckCircle, TrendingUp, AlertTriangle, Calendar, Target } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const statusColors = {
   "In Progress": "bg-proficiency-working text-white",
@@ -10,9 +11,10 @@ const statusColors = {
 
 export function Development() {
   const { data } = useResumeDataContext();
+  const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="development" className="section">
+    <section id="development" className={`section ${isVisible ? "animate-fade-in" : "opacity-0"}`} ref={ref}>
       <div className="container-wide">
         <h2 className="mb-4">Continuous Improvement & Mission Readiness</h2>
         <p className="text-muted-foreground mb-8 max-w-2xl">

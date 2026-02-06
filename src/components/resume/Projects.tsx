@@ -1,12 +1,14 @@
 import { Lightbulb, Target, Wrench } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export function Projects() {
   const { data } = useResumeDataContext();
+  const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="projects" className="section section-alt">
+    <section id="projects" className={`section section-alt ${isVisible ? "animate-fade-in" : "opacity-0"}`} ref={ref}>
       <div className="container-wide">
         <h2 className="mb-4">Selected Projects & Case Studies</h2>
         <p className="text-muted-foreground mb-8 max-w-2xl">
