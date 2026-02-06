@@ -4,17 +4,19 @@ import { MapPin, Download, Linkedin, Mail } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
  import { useResumeDownload } from "@/hooks/useResumeDownload";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export function Hero() {
   const { data } = useResumeDataContext();
    const { downloadResume, isGenerating } = useResumeDownload();
+  const { ref, isVisible } = useScrollAnimation();
  
    const handleDownload = () => {
      downloadResume(data);
    };
 
   return (
-    <section id="hero" className="pt-24 pb-16 md:pt-32 md:pb-24">
+    <section id="hero" className={`pt-24 pb-16 md:pt-32 md:pb-24 ${isVisible ? "animate-fade-in" : "opacity-0"}`} ref={ref}>
       <div className="container-wide">
         <div className="max-w-3xl">
           {/* Name and Title */}

@@ -2,9 +2,11 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export function Experience() {
   const { data } = useResumeDataContext();
+  const { ref, isVisible } = useScrollAnimation();
   const [expandedIds, setExpandedIds] = useState<string[]>([
     data.experience[0]?.id,
   ]);
@@ -16,7 +18,7 @@ export function Experience() {
   };
 
   return (
-    <section id="experience" className="section section-alt">
+    <section id="experience" className={`section section-alt ${isVisible ? "animate-fade-in" : "opacity-0"}`} ref={ref}>
       <div className="container-wide">
         <h2 className="mb-8">Professional Experience</h2>
 

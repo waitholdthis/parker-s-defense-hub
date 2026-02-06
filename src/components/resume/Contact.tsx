@@ -1,12 +1,14 @@
 import { Mail, Linkedin, MapPin, Briefcase, Plane, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 export function Contact() {
   const { data } = useResumeDataContext();
+  const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section id="contact" className="section section-alt">
+    <section id="contact" className={`section section-alt ${isVisible ? "animate-fade-in" : "opacity-0"}`} ref={ref}>
       <div className="container-wide">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="mb-4">Get In Touch</h2>
