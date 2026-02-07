@@ -1,8 +1,9 @@
 import { Helmet } from "react-helmet-async";
-import resumeData from "@/data/resume.json";
+import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 
 export function SEO() {
-  const { personal, skillChips, executiveSummary } = resumeData;
+  const { data } = useResumeDataContext();
+  const { personal, skillChips, executiveSummary } = data;
 
   const title = `${personal.name} | ${personal.title} - CWMD, CBRN, Homeland Security Expert`;
   const description = executiveSummary[0] || 
