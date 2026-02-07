@@ -8,11 +8,11 @@ interface FitScoreGaugeProps {
   animated?: boolean;
 }
 
-export function FitScoreGauge({ 
-  score, 
-  size = "md", 
+export function FitScoreGauge({
+  score,
+  size = "md",
   label,
-  animated = true 
+  animated = true
 }: FitScoreGaugeProps) {
   const [displayScore, setDisplayScore] = useState(animated ? 0 : score);
 
@@ -22,12 +22,11 @@ export function FitScoreGauge({
       return;
     }
 
-    // Animate the score from 0 to target
-    const duration = 1500; // ms
+    const duration = 1500;
     const steps = 60;
     const stepDuration = duration / steps;
     const increment = score / steps;
-    
+
     let currentStep = 0;
     const timer = setInterval(() => {
       currentStep++;
@@ -53,49 +52,81 @@ export function FitScoreGauge({
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (displayScore / 100) * circumference;
 
-  // Color based on score
-  const getScoreColor = (score: number) => {
-    if (score >= 75) return "text-green-500 stroke-green-500";
-    if (score >= 60) return "text-blue-500 stroke-blue-500";
-    if (score >= 45) return "text-yellow-500 stroke-yellow-500";
-    return "text-red-500 stroke-red-500";
+  const getGradientId = (score: number) => {
+    if (score >= 75) return "gaugeGreen";
+    if (score >= 60) return "gaugePurple";
+    if (score >= 45) return "gaugeAmber";
+    return "gaugeRed";
   };
 
-  const getTrackColor = (score: number) => {
-    if (score >= 75) return "stroke-green-100";
-    if (score >= 60) return "stroke-blue-100";
-    if (score >= 45) return "stroke-yellow-100";
-    return "stroke-red-100";
+  const getTextColor = (score: number) => {
+    if (score >= 75) return "text-proficiency-advanced";
+    if (score >= 60) return "text-primary";
+    if (score >= 45) return "text-proficiency-foundational";
+    return "text-destructive";
+  };
+
+  const getTrackOpacity = (score: number) => {
+    if (score >= 75) return "stroke-proficiency-advanced/15";
+    if (score >= 60) return "stroke-primary/15";
+    if (score >= 45) return "stroke-proficiency-foundational/15";
+    return "stroke-destructive/15";
   };
 
   return (
     <div className={cn("relative flex items-center justify-center", config.container)}>
       <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="gaugeGreen" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="hsl(162 94% 40%)" />
+            <stop offset="100%" stopColor="hsl(142 76% 46%)" />
+          </linearGradient>
+          <linearGradient id="gaugePurple" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="hsl(250 84% 54%)" />
+            <stop offset="100%" stopColor="hsl(199 89% 48%)" />
+          </linearGradient>
+          <linearGradient id="gaugeAmber" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="hsl(32 95% 55%)" />
+            <stop offset="100%" stopColor="hsl(45 93% 55%)" />
+          </linearGradient>
+          <linearGradient id="gaugeRed" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="hsl(0 84% 60%)" />
+            <stop offset="100%" stopColor="hsl(20 90% 55%)" />
+          </linearGradient>
+          <filter id="gaugeGlow">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
         {/* Background track */}
         <circle
           cx="50"
           cy="50"
           r={radius}
           fill="none"
-          className={cn("transition-colors duration-500", getTrackColor(displayScore))}
+          className={cn("transition-colors duration-500", getTrackOpacity(displayScore))}
           strokeWidth={config.stroke}
         />
-        {/* Progress arc */}
+        {/* Progress arc with gradient */}
         <circle
           cx="50"
           cy="50"
           r={radius}
           fill="none"
-          className={cn("transition-all duration-500", getScoreColor(displayScore))}
+          stroke={`url(#${getGradientId(displayScore)})`}
           strokeWidth={config.stroke}
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
+          filter="url(#gaugeGlow)"
           style={{ transition: animated ? "stroke-dashoffset 1.5s ease-out" : "none" }}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className={cn("font-bold tabular-nums", config.text, getScoreColor(displayScore).split(" ")[0])}>
+        <span className={cn("font-bold font-display tabular-nums", config.text, getTextColor(displayScore))}>
           {displayScore}
         </span>
         {label && (

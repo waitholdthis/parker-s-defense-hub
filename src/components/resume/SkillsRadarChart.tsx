@@ -29,8 +29,8 @@ function CustomTooltip({ active, payload }: any) {
   const data = payload[0].payload as RadarDataPoint;
 
   return (
-    <div className="bg-popover border border-border rounded-lg p-3 shadow-lg">
-      <p className="font-semibold text-foreground mb-2">{data.category}</p>
+    <div className="glass-card p-3">
+      <p className="font-semibold text-foreground mb-2 font-display">{data.category}</p>
       <p className="text-sm text-muted-foreground mb-2">
         Average: <span className="text-foreground font-medium">{data.value.toFixed(2)}</span> / 3
       </p>
@@ -65,9 +65,9 @@ export function SkillsRadarChart({ categories }: SkillsRadarChartProps) {
   );
 
   return (
-    <div className="bg-card border border-border rounded-lg p-6 mb-8">
+    <div className="glass-card p-6 mb-8 glow-hover">
       <div className="text-center mb-4">
-        <h3 className="text-lg font-semibold text-foreground">
+        <h3 className="text-lg font-semibold text-foreground font-display">
           Skills Proficiency Overview
         </h3>
         <p className="text-sm text-muted-foreground">
@@ -83,9 +83,19 @@ export function SkillsRadarChart({ categories }: SkillsRadarChartProps) {
             outerRadius="70%"
             data={radarData}
           >
+            <defs>
+              <linearGradient id="radarGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="hsl(250 84% 54%)" />
+                <stop offset="100%" stopColor="hsl(199 89% 48%)" />
+              </linearGradient>
+              <linearGradient id="radarGradientDark" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="hsl(250 84% 64%)" />
+                <stop offset="100%" stopColor="hsl(199 89% 55%)" />
+              </linearGradient>
+            </defs>
             <PolarGrid
               stroke="hsl(var(--border))"
-              strokeOpacity={0.5}
+              strokeOpacity={0.4}
             />
             <PolarAngleAxis
               dataKey="category"
@@ -108,9 +118,9 @@ export function SkillsRadarChart({ categories }: SkillsRadarChartProps) {
             <Radar
               name="Proficiency"
               dataKey="value"
-              stroke="hsl(var(--primary))"
-              fill="hsl(var(--primary))"
-              fillOpacity={0.3}
+              stroke="url(#radarGradient)"
+              fill="url(#radarGradient)"
+              fillOpacity={0.25}
               strokeWidth={2}
               dot={{
                 r: 4,
@@ -131,15 +141,15 @@ export function SkillsRadarChart({ categories }: SkillsRadarChartProps) {
 
       <div className="flex justify-center gap-6 mt-4 text-xs text-muted-foreground">
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-proficiency-advanced" />
+          <span className="w-3 h-3 rounded-full bg-proficiency-advanced shadow-sm shadow-proficiency-advanced/40" />
           <span>Advanced (3)</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-proficiency-working" />
+          <span className="w-3 h-3 rounded-full bg-proficiency-working shadow-sm shadow-proficiency-working/40" />
           <span>Working (2)</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-proficiency-foundational" />
+          <span className="w-3 h-3 rounded-full bg-proficiency-foundational shadow-sm shadow-proficiency-foundational/40" />
           <span>Foundational (1)</span>
         </div>
       </div>

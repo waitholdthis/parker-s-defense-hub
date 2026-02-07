@@ -5,13 +5,15 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-8 border-t border-border">
+    <footer className="py-8">
+      {/* Gradient top separator */}
+      <div className="h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent mb-8" />
       <div className="container-wide">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
           <p>
-            © {currentYear} {data.personal.name}. All rights reserved.
+            &copy; {currentYear} {data.personal.name}. All rights reserved.
           </p>
-          <p>
+          <p className="gradient-text font-medium">
             Built with purpose for mission-focused careers.
           </p>
         </div>

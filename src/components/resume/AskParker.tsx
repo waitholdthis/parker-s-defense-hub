@@ -66,7 +66,7 @@ export const AskParker = () => {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
-      
+
       textBuffer += decoder.decode(value, { stream: true });
 
       let newlineIndex: number;
@@ -169,12 +169,12 @@ export const AskParker = () => {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button with glow pulse */}
       <Button
         onClick={() => setIsOpen(true)}
         className={cn(
-          "fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-lg transition-all duration-300 hover:scale-105",
-          "bg-primary text-primary-foreground hover:bg-primary/90",
+          "fixed bottom-6 right-6 z-50 h-14 w-14 rounded-full shadow-xl transition-all duration-300 hover:scale-110",
+          "bg-gradient-to-r from-primary to-accent text-white border-0 animate-glow-pulse",
           isOpen && "scale-0 opacity-0"
         )}
         size="icon"
@@ -186,26 +186,26 @@ export const AskParker = () => {
       {/* Chat panel */}
       <div
         className={cn(
-          "fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] rounded-xl border bg-background shadow-2xl transition-all duration-300",
-          "flex flex-col overflow-hidden",
+          "fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] rounded-2xl shadow-2xl transition-all duration-300",
+          "flex flex-col overflow-hidden glass-card",
           isOpen ? "h-[600px] max-h-[calc(100vh-3rem)] opacity-100" : "h-0 opacity-0 pointer-events-none"
         )}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between border-b bg-muted/50 px-4 py-3">
+        {/* Header with gradient */}
+        <div className="flex items-center justify-between bg-gradient-to-r from-primary to-accent px-4 py-3">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white">
               <Bot className="h-4 w-4" />
             </div>
             <div>
-              <h3 className="font-semibold text-sm">Ask about Parker</h3>
-              <p className="text-xs text-muted-foreground">AI-powered resume assistant</p>
+              <h3 className="font-semibold text-sm text-white font-display">Ask about Parker</h3>
+              <p className="text-xs text-white/70">AI-powered resume assistant</p>
             </div>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            className="h-8 w-8"
+            className="h-8 w-8 text-white/80 hover:text-white hover:bg-white/10"
             onClick={() => setIsOpen(false)}
             aria-label="Close chat"
           >
@@ -217,8 +217,8 @@ export const AskParker = () => {
         <ScrollArea className="flex-1 p-4" ref={scrollRef}>
           {messages.length === 0 ? (
             <div className="space-y-4">
-              <div className="rounded-lg bg-muted/50 p-4 text-sm">
-                <p className="font-medium mb-2">👋 Welcome!</p>
+              <div className="rounded-xl bg-primary/5 border border-primary/10 p-4 text-sm">
+                <p className="font-medium mb-2 font-display">Welcome!</p>
                 <p className="text-muted-foreground text-xs leading-relaxed">
                   I can answer questions about Parker's experience, skills, and qualifications using the information from this profile. Try one of the suggestions below or ask your own question.
                 </p>
@@ -229,7 +229,7 @@ export const AskParker = () => {
                   <button
                     key={i}
                     onClick={() => handleSend(q)}
-                    className="block w-full text-left text-sm p-2 rounded-md border hover:bg-muted/50 transition-colors"
+                    className="block w-full text-left text-sm p-2.5 rounded-lg border border-border/50 hover:bg-primary/5 hover:border-primary/20 transition-all duration-200"
                   >
                     {q}
                   </button>
@@ -250,7 +250,7 @@ export const AskParker = () => {
                     className={cn(
                       "flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs",
                       msg.role === "user"
-                        ? "bg-primary text-primary-foreground"
+                        ? "bg-gradient-to-br from-primary to-accent text-white"
                         : "bg-muted"
                     )}
                   >
@@ -262,9 +262,9 @@ export const AskParker = () => {
                   </div>
                   <div
                     className={cn(
-                      "rounded-lg px-3 py-2 text-sm max-w-[80%]",
+                      "rounded-xl px-3 py-2 text-sm max-w-[80%]",
                       msg.role === "user"
-                        ? "bg-primary text-primary-foreground"
+                        ? "bg-gradient-to-r from-primary to-accent text-white"
                         : "bg-muted"
                     )}
                   >
@@ -279,7 +279,7 @@ export const AskParker = () => {
                   <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-muted">
                     <Bot className="h-3.5 w-3.5" />
                   </div>
-                  <div className="rounded-lg bg-muted px-3 py-2">
+                  <div className="rounded-xl bg-muted px-3 py-2">
                     <Loader2 className="h-4 w-4 animate-spin" />
                   </div>
                 </div>
@@ -289,7 +289,7 @@ export const AskParker = () => {
         </ScrollArea>
 
         {/* Input */}
-        <div className="border-t p-3">
+        <div className="border-t border-border/50 p-3">
           <div className="flex gap-2">
             <Textarea
               ref={textareaRef}
@@ -297,7 +297,7 @@ export const AskParker = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ask about Parker's experience..."
-              className="min-h-[44px] max-h-[120px] resize-none text-sm"
+              className="min-h-[44px] max-h-[120px] resize-none text-sm rounded-xl border-primary/10 focus:border-primary/30"
               rows={1}
               disabled={isLoading}
             />
@@ -305,7 +305,7 @@ export const AskParker = () => {
               onClick={() => handleSend()}
               disabled={!input.trim() || isLoading}
               size="icon"
-              className="h-11 w-11 shrink-0"
+              className="h-11 w-11 shrink-0 rounded-xl bg-gradient-to-r from-primary to-accent text-white border-0 hover:opacity-90 transition-opacity"
               aria-label="Send message"
             >
               {isLoading ? (

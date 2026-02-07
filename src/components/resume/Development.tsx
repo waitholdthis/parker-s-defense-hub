@@ -4,9 +4,9 @@ import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const statusColors = {
-  "In Progress": "bg-proficiency-working text-white",
+  "In Progress": "bg-proficiency-working text-white shadow-sm shadow-proficiency-working/30",
   Planned: "bg-muted text-muted-foreground",
-  Completed: "bg-proficiency-advanced text-white",
+  Completed: "bg-proficiency-advanced text-white shadow-sm shadow-proficiency-advanced/30",
 };
 
 export function Development() {
@@ -16,7 +16,9 @@ export function Development() {
   return (
     <section id="development" className={`section ${isVisible ? "animate-fade-in" : "opacity-0"}`} ref={ref}>
       <div className="container-wide">
-        <h2 className="mb-4">Continuous Improvement & Mission Readiness</h2>
+        <h2 className="mb-4">
+          Continuous <span className="gradient-text">Improvement</span> & Mission Readiness
+        </h2>
         <p className="text-muted-foreground mb-8 max-w-2xl">
           A commitment to professional growth, honest self-assessment, and
           proactive capability development.
@@ -24,12 +26,13 @@ export function Development() {
 
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Strengths */}
-          <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden">
+            <div className="h-1 bg-gradient-to-r from-proficiency-advanced to-emerald-400 rounded-full -mx-6 -mt-6 mb-5" />
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-proficiency-advanced/20 flex items-center justify-center">
-                <CheckCircle className="h-5 w-5 text-proficiency-advanced" />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-proficiency-advanced to-emerald-400 flex items-center justify-center shadow-md">
+                <CheckCircle className="h-5 w-5 text-white" />
               </div>
-              <h3 className="text-lg font-semibold">Strengths</h3>
+              <h3 className="text-lg font-semibold font-display">Strengths</h3>
             </div>
             <ul className="space-y-3">
               {data.strengths.map((strength, index) => (
@@ -44,12 +47,13 @@ export function Development() {
           </div>
 
           {/* Development Areas */}
-          <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden">
+            <div className="h-1 bg-gradient-to-r from-primary to-accent rounded-full -mx-6 -mt-6 mb-5" />
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-proficiency-working/20 flex items-center justify-center">
-                <TrendingUp className="h-5 w-5 text-proficiency-working" />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
+                <TrendingUp className="h-5 w-5 text-white" />
               </div>
-              <h3 className="text-lg font-semibold">Development Areas</h3>
+              <h3 className="text-lg font-semibold font-display">Development Areas</h3>
             </div>
             <ul className="space-y-3">
               {data.developmentAreas.map((area, index) => (
@@ -64,12 +68,13 @@ export function Development() {
           </div>
 
           {/* Gaps with Mitigation */}
-          <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
+          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden">
+            <div className="h-1 bg-gradient-to-r from-proficiency-foundational to-amber-400 rounded-full -mx-6 -mt-6 mb-5" />
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-lg bg-proficiency-foundational/20 flex items-center justify-center">
-                <AlertTriangle className="h-5 w-5 text-proficiency-foundational" />
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-proficiency-foundational to-amber-400 flex items-center justify-center shadow-md">
+                <AlertTriangle className="h-5 w-5 text-white" />
               </div>
-              <h3 className="text-lg font-semibold">Gaps & Mitigation</h3>
+              <h3 className="text-lg font-semibold font-display">Gaps & Mitigation</h3>
             </div>
             <ul className="space-y-4">
               {data.gaps.map((item, index) => (
@@ -88,22 +93,22 @@ export function Development() {
         </div>
 
         {/* Current Learning Plan */}
-        <div className="mt-12 bg-card border border-border rounded-lg p-6 shadow-sm">
+        <div className="mt-12 glass-card p-6 gradient-border overflow-hidden">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-              <Target className="h-5 w-5 text-primary" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
+              <Target className="h-5 w-5 text-white" />
             </div>
-            <h3 className="text-lg font-semibold">Current Learning Plan</h3>
+            <h3 className="text-lg font-semibold font-display">Current Learning Plan</h3>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {data.learningPlan.map((item, index) => (
               <div
                 key={index}
-                className="bg-secondary/50 rounded-lg p-4 border border-border"
+                className="bg-secondary/50 rounded-xl p-4 border border-border/50 hover:-translate-y-0.5 transition-all duration-200"
               >
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <Badge
-                    className={`text-xs ${
+                    className={`text-xs rounded-full ${
                       statusColors[item.status as keyof typeof statusColors] ||
                       statusColors.Planned
                     }`}

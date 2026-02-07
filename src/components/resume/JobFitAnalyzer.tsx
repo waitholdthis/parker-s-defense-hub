@@ -87,14 +87,18 @@ export function JobFitAnalyzer() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="default" size="sm" className="gap-2 bg-accent hover:bg-accent/90">
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-2 rounded-full border-primary/30 hover:border-primary/60 hover:bg-primary/5 transition-all duration-200"
+        >
           <Target className="h-4 w-4" />
           Check Fit
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto glass-card border-primary/10">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+          <DialogTitle className="flex items-center gap-2 font-display">
             <Sparkles className="h-5 w-5 text-accent" />
             Recruiter Fit Score
           </DialogTitle>
@@ -110,14 +114,18 @@ export function JobFitAnalyzer() {
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
               rows={8}
-              className="resize-none"
+              className="resize-none rounded-xl border-primary/10 focus:border-primary/30"
               disabled={isAnalyzing}
             />
             <div className="flex justify-between items-center">
               <span className="text-sm text-muted-foreground">
                 {jobDescription.length} characters
               </span>
-              <Button onClick={handleAnalyze} disabled={isAnalyzing || jobDescription.length < 10}>
+              <Button
+                onClick={handleAnalyze}
+                disabled={isAnalyzing || jobDescription.length < 10}
+                className="bg-gradient-to-r from-primary to-accent text-white border-0 rounded-full hover:opacity-90 transition-opacity"
+              >
                 {isAnalyzing ? (
                   <>
                     <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -144,23 +152,23 @@ export function JobFitAnalyzer() {
 
             {/* Category Breakdown */}
             <div className="grid grid-cols-3 gap-4">
-              <div className="flex flex-col items-center p-4 bg-secondary/50 rounded-lg">
+              <div className="flex flex-col items-center p-4 glass-card">
                 <FitScoreGauge score={analysis.categoryScores.skills} size="sm" />
-                <span className="mt-2 text-sm font-medium">Skills</span>
+                <span className="mt-2 text-sm font-medium font-display">Skills</span>
                 <span className="text-xs text-muted-foreground">
                   {getCategoryLabel(analysis.categoryScores.skills)}
                 </span>
               </div>
-              <div className="flex flex-col items-center p-4 bg-secondary/50 rounded-lg">
+              <div className="flex flex-col items-center p-4 glass-card">
                 <FitScoreGauge score={analysis.categoryScores.experience} size="sm" />
-                <span className="mt-2 text-sm font-medium">Experience</span>
+                <span className="mt-2 text-sm font-medium font-display">Experience</span>
                 <span className="text-xs text-muted-foreground">
                   {getCategoryLabel(analysis.categoryScores.experience)}
                 </span>
               </div>
-              <div className="flex flex-col items-center p-4 bg-secondary/50 rounded-lg">
+              <div className="flex flex-col items-center p-4 glass-card">
                 <FitScoreGauge score={analysis.categoryScores.education} size="sm" />
-                <span className="mt-2 text-sm font-medium">Education</span>
+                <span className="mt-2 text-sm font-medium font-display">Education</span>
                 <span className="text-xs text-muted-foreground">
                   {getCategoryLabel(analysis.categoryScores.education)}
                 </span>
@@ -170,7 +178,7 @@ export function JobFitAnalyzer() {
             {/* Strengths */}
             {analysis.strengths.length > 0 && (
               <div className="space-y-2">
-                <h4 className="flex items-center gap-2 font-medium text-[hsl(var(--proficiency-advanced))]">
+                <h4 className="flex items-center gap-2 font-medium text-proficiency-advanced font-display">
                   <CheckCircle2 className="h-4 w-4" />
                   Strengths for This Role
                 </h4>
@@ -187,7 +195,7 @@ export function JobFitAnalyzer() {
             {/* Gaps */}
             {analysis.gaps.length > 0 && (
               <div className="space-y-2">
-                <h4 className="flex items-center gap-2 font-medium text-[hsl(var(--proficiency-foundational))]">
+                <h4 className="flex items-center gap-2 font-medium text-proficiency-foundational font-display">
                   <AlertCircle className="h-4 w-4" />
                   Potential Gaps
                 </h4>
@@ -204,7 +212,7 @@ export function JobFitAnalyzer() {
             {/* Talking Points */}
             {analysis.talkingPoints.length > 0 && (
               <div className="space-y-2">
-                <h4 className="flex items-center gap-2 font-medium text-accent">
+                <h4 className="flex items-center gap-2 font-medium text-accent font-display">
                   <MessageSquare className="h-4 w-4" />
                   Suggested Interview Topics
                 </h4>
@@ -219,8 +227,12 @@ export function JobFitAnalyzer() {
             )}
 
             {/* Reset Button */}
-            <div className="flex justify-center pt-4 border-t">
-              <Button variant="outline" onClick={handleReset}>
+            <div className="flex justify-center pt-4 border-t border-border/50">
+              <Button
+                variant="outline"
+                onClick={handleReset}
+                className="rounded-full border-primary/30 hover:border-primary/60 hover:bg-primary/5"
+              >
                 <X className="h-4 w-4 mr-2" />
                 Analyze Another Role
               </Button>

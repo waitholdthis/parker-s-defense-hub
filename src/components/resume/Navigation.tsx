@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
- import { Menu, X, Download, Linkedin, Mail, Loader2 } from "lucide-react";
- import { ThemeToggle } from "@/components/ThemeToggle";
+import { Menu, X, Download, Linkedin, Mail, Loader2 } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { Button } from "@/components/ui/button";
 import { JobFitAnalyzer } from "./JobFitAnalyzer";
 import { useResumeDataContext } from "@/contexts/ResumeDataContext";
- import { useResumeDownload } from "@/hooks/useResumeDownload";
+import { useResumeDownload } from "@/hooks/useResumeDownload";
 
 const navItems = [
   { href: "#summary", label: "Summary" },
@@ -18,7 +18,7 @@ const navItems = [
 
 export function Navigation() {
   const { data: resumeData } = useResumeDataContext();
-   const { downloadResume, isGenerating } = useResumeDownload();
+  const { downloadResume, isGenerating } = useResumeDownload();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -30,17 +30,17 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-   const handleDownload = () => {
-     if (resumeData) {
-       downloadResume(resumeData);
-     }
-   };
- 
+  const handleDownload = () => {
+    if (resumeData) {
+      downloadResume(resumeData);
+    }
+  };
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-sm border-b border-border shadow-sm"
+          ? "bg-[hsl(var(--glass-bg))] backdrop-blur-xl border-b border-[hsl(var(--glass-border))] shadow-lg"
           : "bg-transparent"
       }`}
     >
@@ -49,7 +49,9 @@ export function Navigation() {
           {/* Name/Logo */}
           <a
             href="#"
-            className="font-semibold text-lg text-foreground hover:text-accent transition-colors"
+            className={`font-display font-bold text-lg transition-all duration-300 ${
+              isScrolled ? "gradient-text" : "text-foreground hover:text-primary"
+            }`}
           >
             {resumeData?.personal?.name || "Resume"}
           </a>
@@ -60,7 +62,7 @@ export function Navigation() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground relative after:absolute after:bottom-[-4px] after:left-0 after:h-0.5 after:w-0 hover:after:w-full after:bg-gradient-to-r after:from-primary after:to-accent after:transition-all after:duration-300 after:rounded-full"
               >
                 {item.label}
               </a>
@@ -70,13 +72,13 @@ export function Navigation() {
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
             <JobFitAnalyzer />
-             <ThemeToggle />
+            <ThemeToggle />
             {resumeData?.personal?.linkedin && (
               <a
                 href={resumeData.personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="LinkedIn Profile"
               >
                 <Linkedin className="h-5 w-5" />
@@ -85,18 +87,23 @@ export function Navigation() {
             {resumeData?.personal?.email && (
               <a
                 href={`mailto:${resumeData.personal.email}`}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-primary transition-colors duration-200"
                 aria-label="Send Email"
               >
                 <Mail className="h-5 w-5" />
               </a>
             )}
-           <Button size="sm" className="gap-2" onClick={handleDownload} disabled={isGenerating}>
-             {isGenerating ? (
-               <Loader2 className="h-4 w-4 animate-spin" />
-             ) : (
-               <Download className="h-4 w-4" />
-             )}
+            <Button
+              size="sm"
+              className="gap-2 bg-gradient-to-r from-primary to-accent text-white border-0 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200"
+              onClick={handleDownload}
+              disabled={isGenerating}
+            >
+              {isGenerating ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Download className="h-4 w-4" />
+              )}
               Resume
             </Button>
           </div>
@@ -117,13 +124,13 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-background border-b border-border pb-4">
+          <div className="md:hidden glass-card rounded-none border-x-0 border-t-0 pb-4 animate-scale-in">
             <div className="flex flex-col gap-2">
               {navItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-primary/5 rounded-lg transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
@@ -132,13 +139,13 @@ export function Navigation() {
               <div className="flex flex-col gap-3 px-4 pt-4 border-t border-border mt-2">
                 <JobFitAnalyzer />
                 <div className="flex items-center gap-3">
-                   <ThemeToggle />
+                  <ThemeToggle />
                   {resumeData?.personal?.linkedin && (
                     <a
                       href={resumeData.personal.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                       aria-label="LinkedIn Profile"
                     >
                       <Linkedin className="h-5 w-5" />
@@ -147,18 +154,23 @@ export function Navigation() {
                   {resumeData?.personal?.email && (
                     <a
                       href={`mailto:${resumeData.personal.email}`}
-                      className="text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-muted-foreground hover:text-primary transition-colors"
                       aria-label="Send Email"
                     >
                       <Mail className="h-5 w-5" />
                     </a>
                   )}
-                   <Button size="sm" className="gap-2 ml-auto" onClick={handleDownload} disabled={isGenerating}>
-                     {isGenerating ? (
-                       <Loader2 className="h-4 w-4 animate-spin" />
-                     ) : (
-                       <Download className="h-4 w-4" />
-                     )}
+                  <Button
+                    size="sm"
+                    className="gap-2 ml-auto bg-gradient-to-r from-primary to-accent text-white border-0 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-200"
+                    onClick={handleDownload}
+                    disabled={isGenerating}
+                  >
+                    {isGenerating ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Download className="h-4 w-4" />
+                    )}
                     Resume
                   </Button>
                 </div>
