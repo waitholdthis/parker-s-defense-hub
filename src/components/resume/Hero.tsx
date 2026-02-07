@@ -6,7 +6,7 @@ import { useResumeDataContext } from "@/contexts/ResumeDataContext";
 import { useResumeDownload } from "@/hooks/useResumeDownload";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
-const PHOTO_URL = "/headshot.jpg";
+const PHOTO_URL = `${import.meta.env.BASE_URL}headshot.jpg`;
 
 export function Hero() {
   const { data } = useResumeDataContext();
