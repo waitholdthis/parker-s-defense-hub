@@ -104,8 +104,8 @@ export function Hero() {
                 <Badge
                   key={chip}
                   variant="secondary"
-                  className="px-3 py-1.5 text-sm font-medium glass-card border-primary/10 hover:border-primary/30 hover:scale-105 transition-all duration-200 cursor-default"
-                  style={{ animationDelay: `${index * 50}ms` }}
+                  className="px-3 py-1.5 text-sm font-medium glass-card border-primary/10 hover:border-primary/30 hover:scale-105 transition-all duration-200 cursor-default opacity-0 animate-slide-up"
+                  style={{ animationDelay: `${index * 75}ms` }}
                 >
                   {chip}
                 </Badge>

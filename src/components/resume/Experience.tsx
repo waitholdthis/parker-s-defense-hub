@@ -33,7 +33,11 @@ export function Experience() {
               const isExpanded = expandedIds.includes(role.id);
 
               return (
-                <div key={role.id} className="relative pl-8 md:pl-20">
+                <div
+                  key={role.id}
+                  className="relative pl-8 md:pl-20 opacity-0 animate-slide-up"
+                  style={{ animationDelay: `${index * 150}ms` }}
+                >
                   {/* Timeline dot - gradient with glow */}
                   <div className={`absolute left-0 md:left-8 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-br from-primary to-accent border-4 border-background shadow-md ${index === 0 ? "animate-glow-pulse ring-4 ring-primary/20" : ""}`} />
 
