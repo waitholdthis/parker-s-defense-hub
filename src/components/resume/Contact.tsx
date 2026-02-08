@@ -59,7 +59,7 @@ export function Contact() {
 
           {/* Availability Info */}
           <div className="grid gap-4 md:grid-cols-3">
-            <div className="glass-card p-4 glow-hover transition-all duration-200">
+            <div className="glass-card p-4 glow-hover transition-all duration-200 opacity-0 animate-slide-up" style={{ animationDelay: "0ms" }}>
               <div className="flex items-center justify-center gap-2 mb-2">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                   <Briefcase className="h-4 w-4 text-white" />
@@ -70,7 +70,7 @@ export function Contact() {
                 {data.personal.availability}
               </p>
             </div>
-            <div className="glass-card p-4 glow-hover transition-all duration-200">
+            <div className="glass-card p-4 glow-hover transition-all duration-200 opacity-0 animate-slide-up" style={{ animationDelay: "150ms" }}>
               <div className="flex items-center justify-center gap-2 mb-2">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-cyan-400 flex items-center justify-center">
                   <Plane className="h-4 w-4 text-white" />
@@ -81,7 +81,7 @@ export function Contact() {
                 {data.personal.travelWillingness}
               </p>
             </div>
-            <div className="glass-card p-4 glow-hover transition-all duration-200">
+            <div className="glass-card p-4 glow-hover transition-all duration-200 opacity-0 animate-slide-up" style={{ animationDelay: "300ms" }}>
               <div className="flex items-center justify-center gap-2 mb-2">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-proficiency-advanced to-emerald-400 flex items-center justify-center">
                   <Shield className="h-4 w-4 text-white" />

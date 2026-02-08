@@ -26,7 +26,7 @@ export function Development() {
 
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Strengths */}
-          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden">
+          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden opacity-0 animate-slide-up" style={{ animationDelay: "0ms" }}>
             <div className="h-1 bg-gradient-to-r from-proficiency-advanced to-emerald-400 rounded-full -mx-6 -mt-6 mb-5" />
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-proficiency-advanced to-emerald-400 flex items-center justify-center shadow-md">
@@ -47,7 +47,7 @@ export function Development() {
           </div>
 
           {/* Development Areas */}
-          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden">
+          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden opacity-0 animate-slide-up" style={{ animationDelay: "150ms" }}>
             <div className="h-1 bg-gradient-to-r from-primary to-accent rounded-full -mx-6 -mt-6 mb-5" />
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
@@ -68,7 +68,7 @@ export function Development() {
           </div>
 
           {/* Gaps with Mitigation */}
-          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden">
+          <div className="glass-card p-6 glow-hover transition-all duration-300 overflow-hidden opacity-0 animate-slide-up" style={{ animationDelay: "300ms" }}>
             <div className="h-1 bg-gradient-to-r from-proficiency-foundational to-amber-400 rounded-full -mx-6 -mt-6 mb-5" />
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-proficiency-foundational to-amber-400 flex items-center justify-center shadow-md">
@@ -104,7 +104,8 @@ export function Development() {
             {data.learningPlan.map((item, index) => (
               <div
                 key={index}
-                className="bg-secondary/50 rounded-xl p-4 border border-border/50 hover:-translate-y-0.5 transition-all duration-200"
+                className="bg-secondary/50 rounded-xl p-4 border border-border/50 hover:-translate-y-0.5 transition-all duration-200 opacity-0 animate-slide-up"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <Badge

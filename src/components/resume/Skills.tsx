@@ -96,10 +96,11 @@ export function Skills() {
 
           <TabsContent value={activeCategory} className="mt-0">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {displayCategories.map((category) => (
+              {displayCategories.map((category, index) => (
                 <div
                   key={category.name}
-                  className="glass-card p-6 glow-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                  className="glass-card p-6 glow-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden opacity-0 animate-slide-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   {/* Gradient accent bar */}
                   <div className="h-1 bg-gradient-to-r from-primary to-accent rounded-full -mx-6 -mt-6 mb-5" />
