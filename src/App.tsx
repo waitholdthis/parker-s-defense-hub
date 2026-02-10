@@ -10,6 +10,8 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+const basePath = import.meta.env.VITE_BASE_PATH || "/parker-s-defense-hub";
+const basename = basePath === "/" ? undefined : basePath.replace(/\/$/, "");
 
  const App = () => (
    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -18,7 +20,7 @@ const queryClient = new QueryClient();
          <TooltipProvider>
            <Toaster />
            <Sonner />
-           <BrowserRouter>
+           <BrowserRouter basename={basename}>
              <Routes>
                <Route path="/" element={<Index />} />
                <Route path="/admin" element={<Admin />} />
