@@ -1,0 +1,13 @@
+services:
+  parker-defense-hub:
+    build: .
+    container_name: parker-defense-hub
+    restart: unless-stopped
+    ports:
+      - "3080:80"
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

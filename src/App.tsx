@@ -18,7 +18,7 @@ const queryClient = new QueryClient();
          <TooltipProvider>
            <Toaster />
            <Sonner />
-           <BrowserRouter basename="/parker-s-defense-hub">
+           <BrowserRouter>
              <Routes>
                <Route path="/" element={<Index />} />
                <Route path="/admin" element={<Admin />} />
