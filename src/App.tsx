@@ -10,8 +10,12 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
-const basePath = import.meta.env.VITE_BASE_PATH || "/parker-s-defense-hub";
-const basename = basePath === "/" ? undefined : basePath.replace(/\/$/, "");
+const configuredBasePath = import.meta.env.VITE_BASE_PATH || "/parker-s-defense-hub";
+const normalizedBasePath = configuredBasePath === "/" ? "" : configuredBasePath.replace(/\/$/, "");
+const basename =
+  normalizedBasePath && window.location.pathname.startsWith(normalizedBasePath)
+    ? normalizedBasePath
+    : undefined;
 
  const App = () => (
    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
