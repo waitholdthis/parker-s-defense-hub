@@ -4,7 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: process.env.VITE_BASE_PATH || "/parker-s-defense-hub/",
+  // Set this to "/" for your custom domain
+  base: "/", 
   server: {
     host: "::",
     port: 8080,
@@ -19,6 +20,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // ADD THIS LINE BELOW:
-  base: "/parker-s-defense-hub/",
 }));
