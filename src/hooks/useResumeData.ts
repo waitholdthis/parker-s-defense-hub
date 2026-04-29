@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import fallbackResume from '@/data/resume.json';
 
 export interface ResumeData {
   personal: {
@@ -111,11 +112,12 @@ export function useResumeData(): UseResumeDataReturn {
         throw new Error(result.error);
       }
 
-      setData(result.content);
+      setData(result.content || (fallbackResume as ResumeData));
       setUpdatedAt(result.updatedAt);
     } catch (err) {
-      console.error('Error fetching resume data:', err);
-      setError(err instanceof Error ? err.message : 'Failed to fetch resume data');
+      console.warn('Resume fetch failed, using bundled fallback:', err);
+      setData(fallbackResume as ResumeData);
+      setUpdatedAt(null);
     } finally {
       setLoading(false);
     }
